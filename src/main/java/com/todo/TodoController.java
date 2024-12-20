@@ -11,7 +11,6 @@ import java.util.List;
 
 @Controller
 public class TodoController {
-
     List<Todo> todoList = new ArrayList<>();
 
     public TodoController() {
