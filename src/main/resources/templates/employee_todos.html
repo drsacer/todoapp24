@@ -18,9 +18,10 @@
                 <h3> Todo App</h3>
             </div>
             <div class="col-6 text-end">
-                Ivan Korisnik
                 <img src="man.jfif" width="50px" ; height="50px">
-                <button class="btn btn-link" onclick="window.location.href='login.html'">Logout</button>
+                <button class="btn btn-link" onclick="window.location.href='/login'">Logout</button>
+               <!-- <p th:text="${user.firstName + ' ' + user.getLastName()}">name</p>-->
+                <p th:text = "${session.user.firstName + ' ' + session.user.lastName }"></p>
             </div>
         </div>
     </div>
@@ -29,6 +30,7 @@
         <table class="table table-bordered table-hover ">
             <thead>
             <tr >
+                <th>rb</th>
                 <th>Todo</th>
                 <th>Note</th>
                 <th>Date</th>
@@ -38,20 +40,21 @@
             </thead>
 
             <tbody id="todoTable">
-            <tr th:each="item: ${todoList}">
+            <tr th:each="item, iterStat: ${todoList}">
+                <td th:text="${iterStat.index + 1}">#</td>
                 <td th:text="${item.title}">HTML</td>
                 <td th:text="${item.note}">W3 School</td>
-                <td th:text="${item.date}">2024-12-12</td>
-                <td><button class="btn btn-light" onclick="editRow(this)">
-                    <img src="edit.png" width="25" height="25"></button></td>
+                <!--<td th:text="${item.date}">2024-12-12</td>-->
+                <td th:text="${#dates.format(item.date, 'yyyy-MM-dd')}"></td>
+                <td> <a th:href="@{'/showEditTodo?id=' + ${item.id}}"> <img src="edit.png" width="25" height="25"></a> </td>
                 <!--<td><button class="btn btn-light" onclick="deleteRow(this)">
                     <img src="delete.png" width="25" height="25"></button></td>-->
-                <td> <a th:href="@{'/deleteTodo?title=' + ${item.title}}"> <img src="delete.png" width="25" height="25"></a> </td>
+                <td> <a th:href="@{'/deleteTodo?id=' + ${item.id}}"> <img src="delete.png" width="25" height="25"></a> </td>
             </tr>
             </tbody>
         </table>
     </div>
-    <button class="btn btn-primary" name="add_todo" type="button" onclick="window.location.href='employee_add_todo.html'">Add Todo</button>
+    <button class="btn btn-primary" name="add_todo" type="button" onclick="window.location.href='/openAddNewTodo'">Add Todo</button>
 </div>
 
 

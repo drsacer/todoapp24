@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
 <head>
     <meta charset="UTF-8">
     <title>Add todo</title>
@@ -18,9 +18,9 @@
                 <h3> Todo App</h3>
             </div>
             <div class="col-6 text-end">
-                 Ivan Korisnik
-                <img src="man.jfif" width="50px" ; height="50px">
-                <button class="btn btn-link" onclick="window.location.href='login.html'">Logout</button>
+                <p th:text = "${session.user.firstName + ' ' + session.user.lastName }"></p>
+                <img src="../static/man.jfif" width="50px" ; height="50px">
+                <button class="btn btn-link" onclick="window.location.href='/login'">Logout</button>
             </div>
         </div>
     </div>
@@ -36,11 +36,12 @@
             </div>
             <div>
                 <label for="date">Deadline</label><br>
-                <input class="form-control" type="date" name="date" id="date"> <br>
+                <!--<input class="form-control" type="date" name="date" id="date"> <br>-->
+                <input type="date" id="date" name="date" th:value="${date}" />
             </div>
             <button class="btn btn-primary" name="toTable" type="submit">Save</button>
             <button class="btn btn-primary" name="reset" type="reset">Reset</button>
-            <button class="btn btn-primary" name="openAllTodos" type="button" onclick="window.location.href='employee_todos.html'">View all todos</button>
+           <!-- <button class="btn btn-primary" name="openAllTodos" type="button" onclick="window.location.href='employee_todos.html'">View all todos</button>-->
         </div>
     </form>
 </div>
