@@ -6,17 +6,18 @@ public class Todo {
 
     private String title;
     private String note;
-    private int id;
-    private static int idCounter;
-
 
     private Date date;
 
     public Todo(String title, String note) {
         this.title = title;
         this.note = note;
+<<<<<<<< HEAD:src/main/java/com/todo/model/Todo.java
 
         id = idCounter++;
+========
+        this.date = date;
+>>>>>>>> origin/master:src/main/java/com/todo/Todo.java
     }
 
     public String getTitle() {
@@ -27,6 +28,7 @@ public class Todo {
         return note;
     }
 
+<<<<<<<< HEAD:src/main/java/com/todo/model/Todo.java
 
     public int getId() {
         return id;
@@ -40,4 +42,9 @@ public class Todo {
         this.note = note;
     }
 
+========
+    public Date getDate() {
+        return date;
+    }
+>>>>>>>> origin/master:src/main/java/com/todo/Todo.java
 }
