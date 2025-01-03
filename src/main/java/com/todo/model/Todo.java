@@ -1,5 +1,6 @@
 package com.todo.model;
-import java.util.Date;
+
+import java.time.LocalDate;
 
 public class Todo {
 
@@ -9,14 +10,19 @@ public class Todo {
     private static int idCounter;
 
 
-    private Date date;
+    private LocalDate date;
 
-    public Todo(String title, String note, Date date) {
+    public Todo(String title, String note, LocalDate date) {
         this.title = title;
         this.note = note;
         this.date = date;
 
         id = idCounter++;
+    }
+
+    public Todo(String title, String note) {
+        this.title = title;
+        this.note = note;
     }
 
     public String getTitle() {
@@ -27,7 +33,7 @@ public class Todo {
         return note;
     }
 
-    public Date getDate() {
+    public LocalDate getDate() {
         return date;
     }
 
@@ -43,7 +49,9 @@ public class Todo {
         this.note = note;
     }
 
-    public void setDate(Date date) {
+    public void setDate(LocalDate date) {
         this.date = date;
     }
+
+
 }

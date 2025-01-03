@@ -2,7 +2,6 @@ package com.todo.controller;
 
 import com.todo.model.Todo;
 import com.todo.model.TodoRepositoryMem;
-import com.todo.model.User;
 import jakarta.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -10,7 +9,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
-import java.util.Date;
+import java.time.LocalDate;
 
 @Controller
 public class TodoController {
@@ -37,9 +36,9 @@ public class TodoController {
     @GetMapping("/addNewTodo")
     public String addNewTodo(@RequestParam("date") String dateString, @RequestParam("title") String title, @RequestParam("note") String note,
                              Model model, HttpSession session ){
-        Todo newTodo = new Todo(title, note, new Date());
-        User user = (User) session.getAttribute("user");
-        user.addTodo(newTodo);
+        LocalDate date = LocalDate.parse(dateString);
+        Todo newTodo = new Todo(title, note, date);
+        session.getAttribute("user");
         todoRepo.getTodoList().add(newTodo);
 
         return "redirect:/todos";
@@ -62,11 +61,14 @@ public class TodoController {
     }
 
     @GetMapping("/editTodo")
-    public String editTodo(@RequestParam("id") int id, @RequestParam("title") String title, @RequestParam("note") String note, Model model){
+    public String editTodo(@RequestParam("date") String dateString, @RequestParam("id") int id, @RequestParam("title") String title, @RequestParam("note") String note, Model model){
+
+        LocalDate date = LocalDate.parse(dateString);
 
         Todo todoToEdit = todoRepo.findById(id);
         todoToEdit.setTitle(title);
         todoToEdit.setNote(note);
+        todoToEdit.setDate(date);
 
         return "redirect:/todos";
     }
