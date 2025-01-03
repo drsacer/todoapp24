@@ -1,4 +1,4 @@
-package com.todo;
+package com.todo.model;
 
 import java.util.Date;
 
@@ -12,10 +12,9 @@ public class Todo {
 
     private Date date;
 
-    public Todo(String title, String note, Date date) {
+    public Todo(String title, String note) {
         this.title = title;
         this.note = note;
-        this.date = date;
 
         id = idCounter++;
     }
@@ -28,9 +27,6 @@ public class Todo {
         return note;
     }
 
-    public Date getDate() {
-        return date;
-    }
 
     public int getId() {
         return id;
@@ -44,7 +40,4 @@ public class Todo {
         this.note = note;
     }
 
-    public void setDate(Date date) {
-        this.date = date;
-    }
 }
