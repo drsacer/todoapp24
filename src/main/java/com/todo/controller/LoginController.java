@@ -42,8 +42,10 @@ public class LoginController {
         } else {
             System.out.println("User logged in: " + user);
             if (user.getType() == 1) {
+                session.setAttribute("user", user);
                 return "redirect:/employees";
             } else if (user.getType() == 0) {
+                session.setAttribute("user", user);
                 return "redirect:/todos";
             }
         }

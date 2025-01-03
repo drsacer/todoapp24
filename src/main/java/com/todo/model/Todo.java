@@ -1,25 +1,22 @@
 package com.todo.model;
-
 import java.util.Date;
 
 public class Todo {
 
     private String title;
     private String note;
-
     private int id;
-    static int idCounter = 1;
+    private static int idCounter;
+
 
     private Date date;
 
-    public Todo(String title, String note) {
+    public Todo(String title, String note, Date date) {
         this.title = title;
         this.note = note;
-
-        id = idCounter++;
-
         this.date = date;
 
+        id = idCounter++;
     }
 
     public String getTitle() {
@@ -30,7 +27,9 @@ public class Todo {
         return note;
     }
 
-
+    public Date getDate() {
+        return date;
+    }
 
     public int getId() {
         return id;
@@ -44,8 +43,7 @@ public class Todo {
         this.note = note;
     }
 
-    public Date getDate() {
-        return date;
+    public void setDate(Date date) {
+        this.date = date;
     }
-
 }

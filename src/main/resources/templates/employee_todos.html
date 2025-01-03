@@ -18,9 +18,10 @@
                 <h3> Todo App</h3>
             </div>
             <div class="col-6 text-end">
-                Ivan Korisnik
                 <img src="man.jfif" width="50px" ; height="50px">
-                <button class="btn btn-link" onclick="window.location.href='login.html'">Logout</button>
+                <button class="btn btn-link" onclick="window.location.href='/login'">Logout</button>
+                <p th:text = "${session.user.firstName + ' ' + session.user.lastName }"></p>
+
             </div>
         </div>
     </div>
@@ -29,6 +30,7 @@
         <table class="table table-bordered table-hover ">
             <thead>
             <tr >
+                <th>id</th>
                 <th>Todo</th>
                 <th>Note</th>
                 <th>Date</th>
@@ -38,61 +40,22 @@
             </thead>
 
             <tbody id="todoTable">
-            <tr th:each="item: ${todoList}">
+            <tr th:each="item, iterStat: ${todoList}">
+                <td th:text="${iterStat.index + 1}">1</td>
                 <td th:text="${item.title}">HTML</td>
                 <td th:text="${item.note}">W3 School</td>
                 <td th:text="${item.date}">2024-12-12</td>
-                <td><button class="btn btn-light" onclick="editRow(this)">
-                    <img src="edit.png" width="25" height="25"></button></td>
+                <td> <a th:href="@{'/showEditTodo?id=' + ${item.id}}"> <img src="edit.png" width="25" height="25"></a> </td>
                 <!--<td><button class="btn btn-light" onclick="deleteRow(this)">
                     <img src="delete.png" width="25" height="25"></button></td>-->
-                <td> <a th:href="@{'/deleteTodo?title=' + ${item.title}}"> <img src="delete.png" width="25" height="25"></a> </td>
+                <td> <a th:href="@{'/deleteTodo?id=' + ${item.id}}"> <img src="delete.png" width="25" height="25"></a> </td>
             </tr>
             </tbody>
         </table>
     </div>
-    <button class="btn btn-primary" name="add_todo" type="button" onclick="window.location.href='employee_add_todo.html'">Add Todo</button>
+    <button class="btn btn-primary" name="add_todo" type="button" onclick="window.location.href='/openAddNewTodo'">Add Todo</button>
 </div>
 
-
-
-<script>
-    // Ova skripta umeće novi zapis u tablicu
-
-   // Ako se stranica poziva iz stranice add_todo.html onda se skripta izvršava. Ako se poziva iz login.html tada se skripta ne izvršava
-   // nego se samo prikazuju hardkodirani zapisi u tablici (inače bi napravio 3. redak s gumbima edit i delete)
-
-//if (document.referrer === "http://localhost:63342/KrapinaFrontend/resources/static/add_todo_employee.html") {
-
-  // Dohvaćanje URL parametara
-  /* window.location.search - dohvaća query string trenutnog URLa. Query string je dio URLa
-    koji sadrži key-value parove, npr. ?key1=value1&key2=value2.
-    window.location.search daje string: ?todo=Bootstrap&note=Klase&date=2024-12-27
-    new URLSearchParams - stvara objekt koji omogućava dohvaćanje parametara (params.get)
-
-  var params = new URLSearchParams(window.location.search);
-  var todo = params.get('todo');
-  var note = params.get('note');
-  var date = params.get('date');
-
-  // Dodavanje u tablicu
-
-  var table = document.getElementById('todoTable');
-  var row = table.insertRow();
-
-  var cell1 = row.insertCell(0);
-  var cell2 = row.insertCell(1);
-  var cell3 = row.insertCell(2);
-  var cell4 = row.insertCell(3);
-  var cell5 = row.insertCell(4);
-
-  cell1.innerHTML = todo;
-  cell2.innerHTML = note;
-  cell3.innerHTML = date;
-  cell4.innerHTML = '<button type="button" class="btn btn-link" onclick="editRow(this)"><img src="edit.png" width="25" height="25"></button>';
-  cell5.innerHTML = '<button type="button" class="btn btn-link" onclick="deleteRow(this)"><img src="delete.png" width="25" height="25"></button>';
-//}*/
-</script>
 
 </body>
 </html>

@@ -2,13 +2,15 @@ package com.todo.controller;
 
 import com.todo.model.Todo;
 import com.todo.model.TodoRepositoryMem;
+import com.todo.model.User;
+import jakarta.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
-import java.time.LocalDate;
+import java.util.Date;
 
 @Controller
 public class TodoController {
@@ -17,7 +19,10 @@ public class TodoController {
     TodoRepositoryMem todoRepo;
 
     @GetMapping("/todos")
-    public String showTodos(Model model) {
+    public String showTodos(Model model, HttpSession session) {
+        //User user = (User) session.getAttribute("user");
+        session.getAttribute("user");
+
         model.addAttribute(todoRepo.getTodoList());
         //model.addAttribute("user", user);
 
@@ -30,10 +35,11 @@ public class TodoController {
     }
 
     @GetMapping("/addNewTodo")
-    public String addNewTodo(@RequestParam("date") String date, @RequestParam("title") String title, @RequestParam("note") String note,
-                             Model model){
-
-        Todo newTodo = new Todo(title, note);
+    public String addNewTodo(@RequestParam("date") String dateString, @RequestParam("title") String title, @RequestParam("note") String note,
+                             Model model, HttpSession session ){
+        Todo newTodo = new Todo(title, note, new Date());
+        User user = (User) session.getAttribute("user");
+        user.addTodo(newTodo);
         todoRepo.getTodoList().add(newTodo);
 
         return "redirect:/todos";
@@ -56,14 +62,11 @@ public class TodoController {
     }
 
     @GetMapping("/editTodo")
-    public String editTodo(@RequestParam("id") int id, @RequestParam("title") String title, @RequestParam("note") String note, @RequestParam("date") String date,
-                           Model model){
+    public String editTodo(@RequestParam("id") int id, @RequestParam("title") String title, @RequestParam("note") String note, Model model){
 
         Todo todoToEdit = todoRepo.findById(id);
         todoToEdit.setTitle(title);
         todoToEdit.setNote(note);
-        LocalDate parsedDate = LocalDate.parse(date);
-
 
         return "redirect:/todos";
     }

@@ -1,5 +1,4 @@
 <!DOCTYPE html>
-<<<<<<< HEAD
 <html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
 <head>
     <meta charset="UTF-8">
@@ -21,7 +20,7 @@
                 <img src="admin.png" width="50px" ; height="50px">
                 <button class="btn btn-link" onclick="window.location.href='/login'">Logout</button>
                 <p th:text = "${session.user.firstName + ' ' + session.user.lastName }"></p>
-              <!--  <p th:text="${.firstName + ' ' + user.lastName }">name</p>-->
+                <!--  <p th:text="${user.firstName + ' ' + user.lastName }">name</p>-->
             </div>
         </div>
     </div>
@@ -43,8 +42,8 @@
             </thead>
 
             <tbody id="employeeTable">
-            <tr th:each="item: ${userList}">
-                <td th:text="${item.employeeId}">id</td>
+            <tr th:each="item, iterStat: ${userList}">
+                <td th:text="${iterStat.index + 1}">1</td>
                 <td th:text="${item.firstName}">name</td>
                 <td th:text="${item.lastName}">surname</td>
                 <td th:text="${item.oib}">123456789</td>
@@ -59,17 +58,3 @@
     </div>
     <button class="btn btn-primary" name="add_todo" type="button" onclick="window.location.href='/openSupervisorAddEmployee'">Add employee</button>
 </div>
-
-=======
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Title</title>
-</head>
-<body>
-<h1>My employees</h1>
-
-<p th:text="${email}"> Message</p>
->>>>>>> origin/master
-</body>
-</html>

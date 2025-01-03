@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
 <head>
     <meta charset="UTF-8">
     <title>Login</title>
@@ -22,22 +22,25 @@
         </div>
 
     <h5>User login</h5>
-   <form>
+   <form action="/loginProcess">
        <div class="form-group col-4">
            <div>
                <label for="email">E-mail</label><br>
-               <input class="form-control" type="email" id="email" placeholder="E-mail">
+               <input class="form-control" type="email" id="email" name = "email"placeholder="E-mail">
            </div>
            <div>
                <label for="pass">Password</label><br>
-               <input class="form-control" type="pass" id="pass" placeholder="Enter strong password"> <br>
+               <input class="form-control" type="pass" id="pass" name = "password" placeholder="Enter strong password"> <br>
            </div>
 
-           <button class="btn btn-info" name="login" type="button" onclick="loginProcess()">Login</button>
+           <button class="btn btn-info" name="login" type="submit">Login</button>
            <button class="btn btn-info" name="reset" type="reset">Reset</button>
        </div>
    </form>
 
+        <p th:text="${loginMessage}"> Message</p>
+
+</div>
 </div>
 
 </body>
