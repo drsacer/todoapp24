@@ -1,20 +1,18 @@
-package com.todo;
+package com.todo.model;
 
 import org.springframework.stereotype.Repository;
-import org.springframework.web.bind.annotation.RequestParam;
 
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 
 @Repository
 public class TodoRepositoryMem {
     List<Todo> todoList = new ArrayList<>();
 
-    public TodoRepositoryMem() {
-        todoList.add(new Todo("BS", "Easy", new Date()));
-        todoList.add(new Todo("JS", "Medium", new Date()));
-    }
+ /*   public TodoRepositoryMem() {
+        todoList.add(new Todo("BS", "Easy"));
+        todoList.add(new Todo("JS", "Medium"));
+    }*/
 
     public List<Todo> getTodoList() {
         return todoList;
