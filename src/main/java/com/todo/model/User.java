@@ -20,6 +20,7 @@ public class User implements Serializable  {
     private String oib;
     private String email;
     private String password;
+    private String address;
 
     @Id
     @GeneratedValue
