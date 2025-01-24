@@ -18,11 +18,15 @@
                 <h3> Todo App</h3>
             </div>
             <div class="col-6 text-end">
-                 Ivan Korisnik
+                <p th:text = "${session.user.firstName + ' ' + session.user.lastName }"></p>
                 <img src="man.jfif" width="50px" ; height="50px">
                 <button class="btn btn-link" onclick="window.location.href='login.html'">Logout</button>
             </div>
         </div>
+    </div>
+    <div>
+        <h5 class="text-secondary" th:text="${employee.firstName + ' ' + employee.lastName}"></h5>
+        <!--<p th:text="${message}"></p>-->
     </div>
     <form action="/editEmployee">
         <div class="form-group col-4">
@@ -47,7 +51,7 @@
                 <input th:value="${employee.password}" class="form-control" type="text" id="password" name="password" placeholder="Password">
             </div>
 
-            <input th:value="${employee.employeeId}" name="id" type="hidden">
+            <input th:value="${employee.id}" name="id" type="hidden">
             <button class="btn btn-primary" name="toTable" type="submit">Save</button>
             <button class="btn btn-primary" name="reset" type="reset">Reset</button>
            <!-- <button class="btn btn-primary" name="openAllTodos" type="button" onclick="window.location.href='employee_todos.html'">View all todos</button>-->

@@ -1,28 +1,47 @@
 package com.todo.model;
 
+import jakarta.persistence.*;
+
 import java.time.LocalDate;
 
+
+@Entity
 public class Todo {
+    @Id
+    @GeneratedValue
+    private int id;
 
     private String title;
-    private String note;
-    private int id;
-    private static int idCounter;
 
+    private String note;
 
     private LocalDate date;
+
+    @ManyToOne
+    @JoinColumn(name = "user_id")
+    private User user;
+
+    public User getUser() {
+        return user;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
+    }
 
     public Todo(String title, String note, LocalDate date) {
         this.title = title;
         this.note = note;
         this.date = date;
 
-        id = idCounter++;
     }
 
     public Todo(String title, String note) {
         this.title = title;
         this.note = note;
+    }
+
+    public Todo() {
     }
 
     public String getTitle() {

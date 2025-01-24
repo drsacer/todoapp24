@@ -1,7 +1,9 @@
 package com.todo.controller;
 
 import com.todo.model.Todo;
-import com.todo.model.TodoRepositoryMem;
+import com.todo.model.TodoRepository;
+import com.todo.model.User;
+import com.todo.model.UserRepository;
 import jakarta.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -10,20 +12,25 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import java.time.LocalDate;
+import java.util.List;
 
 @Controller
 public class TodoController {
 
     @Autowired
-    TodoRepositoryMem todoRepo;
+    TodoRepository todoRepoDB;
+    @Autowired
+    UserRepository userRepoDB;
+
 
     @GetMapping("/todos")
     public String showTodos(Model model, HttpSession session) {
-        //User user = (User) session.getAttribute("user");
-        session.getAttribute("user");
 
-        model.addAttribute(todoRepo.getTodoList());
-        //model.addAttribute("user", user);
+        User currentUser = (User) session.getAttribute("user");
+        userRepoDB.findById(currentUser.getId());
+        List<Todo> todos = todoRepoDB.findByUser(currentUser);
+
+        model.addAttribute("todos", todos);
 
         return "employee_todos.html";
     }
@@ -36,26 +43,30 @@ public class TodoController {
     @GetMapping("/addNewTodo")
     public String addNewTodo(@RequestParam("date") String dateString, @RequestParam("title") String title, @RequestParam("note") String note,
                              Model model, HttpSession session ){
+
+        User currentUser = (User) session.getAttribute("user");
+
         LocalDate date = LocalDate.parse(dateString);
         Todo newTodo = new Todo(title, note, date);
-        session.getAttribute("user");
-        todoRepo.getTodoList().add(newTodo);
+        newTodo.setUser(currentUser);
+       // session.getAttribute("user");
+        todoRepoDB.save(newTodo);
 
         return "redirect:/todos";
     }
+
     @GetMapping("/deleteTodo")
     public String deleteTodo(@RequestParam("id") int id) {
 
-        Todo todoToDelete = todoRepo.findById(id);
-        todoRepo.getTodoList().remove(todoToDelete);
-        System.out.println(todoRepo.getTodoList());
+        Todo todoToDelete = todoRepoDB.findById(id).get();
+        todoRepoDB.delete(todoToDelete);
 
         return "redirect:/todos";
     }
 
     @GetMapping("/showEditTodo")
     public String showEditTodo(@RequestParam("id") int id, Model model){
-        Todo todoToEdit = todoRepo.findById(id);
+        Todo todoToEdit = todoRepoDB.findById(id).get();
         model.addAttribute("todo", todoToEdit);
         return "employee_edit_todo.html";
     }
@@ -65,10 +76,12 @@ public class TodoController {
 
         LocalDate date = LocalDate.parse(dateString);
 
-        Todo todoToEdit = todoRepo.findById(id);
+        Todo todoToEdit = todoRepoDB.findById(id).get();
         todoToEdit.setTitle(title);
         todoToEdit.setNote(note);
         todoToEdit.setDate(date);
+
+        todoRepoDB.save(todoToEdit);
 
         return "redirect:/todos";
     }

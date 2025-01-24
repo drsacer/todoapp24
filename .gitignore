@@ -35,3 +35,7 @@ out/
 
 ### VS Code ###
 .vscode/
+/testdb.mv.db
+/testdb.trace.db
+/todoappdb.mv.db
+/todoappdb.trace.db

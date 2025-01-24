@@ -25,6 +25,9 @@
             </div>
         </div>
     </div>
+    <div>
+        <h5 class="text-secondary" th:text="${employee.firstName + ' ' + employee.lastName}"></h5>
+    </div>
     <br>
     <div class="col">
         <table class="table table-bordered table-hover ">
@@ -34,8 +37,8 @@
                 <th>Todo</th>
                 <th>Note</th>
                 <th>Date</th>
-                <th>Edit</th>
-                <th>Delete</th>
+                <!--<th>Edit</th>
+                <th>Delete</th>-->
             </tr>
             </thead>
 
@@ -45,15 +48,15 @@
                 <td th:text="${item.title}">HTML</td>
                 <td th:text="${item.note}">W3 School</td>
                 <td th:text="${item.date}">2024-12-12</td>
-                <td> <a th:href="@{'/showEditTodo?id=' + ${item.id}}"> <img src="edit.png" width="25" height="25"></a> </td>
-                <!--<td><button class="btn btn-light" onclick="deleteRow(this)">
-                    <img src="delete.png" width="25" height="25"></button></td>-->
-                <td> <a th:href="@{'/deleteTodo?id=' + ${item.id}}"> <img src="delete.png" width="25" height="25"></a> </td>
+                <!--<td> <a th:href="@{'/showEditTodo?id=' + ${item.id}}"> <img src="edit.png" width="25" height="25"></a> </td>
+                &lt;!&ndash;<td><button class="btn btn-light" onclick="deleteRow(this)">
+                    <img src="delete.png" width="25" height="25"></button></td>&ndash;&gt;
+                <td> <a th:href="@{'/deleteTodo?id=' + ${item.id}}"> <img src="delete.png" width="25" height="25"></a> </td>-->
             </tr>
             </tbody>
         </table>
     </div>
-    <button class="btn btn-primary" name="add_todo" type="button" onclick="window.location.href='/openAddNewTodo'">Add Todo</button>
+    <!--<button class="btn btn-primary" name="add_todo" type="button" onclick="window.location.href='/openAddNewTodo'">Add Todo</button>-->
 </div>
 
 

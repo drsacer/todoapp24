@@ -1,7 +1,7 @@
 package com.todo.controller;
 
 import com.todo.model.User;
-import com.todo.model.UserRepositoryMem;
+import com.todo.model.UserRepository;
 import jakarta.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -13,7 +13,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 public class LoginController {
 
     @Autowired
-    UserRepositoryMem userRepo;
+    UserRepository userRepositoryDB;
 
     @GetMapping("/login")
     public String login() {
@@ -30,7 +30,7 @@ public class LoginController {
                                Model model, HttpSession session) {
         User user = null;
 
-        for (User u : userRepo.getUserList()) {
+        for (User u : userRepositoryDB.findAll()) {
             System.out.println("Users: " + u);
             if (u.getEmail().equals(email) && u.getPassword().equals(password)) {
                 user = u;

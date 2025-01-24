@@ -1,6 +1,5 @@
 package com.todo.model;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import java.util.ArrayList;
@@ -10,8 +9,6 @@ import java.util.List;
 public class UserRepositoryMem {
 
     List<User> usersList = new ArrayList<>();
-    @Autowired
-    TodoRepositoryMem todoRepo;
 
     public UserRepositoryMem() {
         usersList.add(new User("Admin", "Marko", "12345","admin@todo.com", "admin",1));
@@ -25,18 +22,11 @@ public class UserRepositoryMem {
     public User findById (int id) {
         User user = null;
         for (User u:usersList) {
-            if (u.getEmployeeId()==id) {
+            if (u.getId()==id) {
                 user = u;
             }
         }
         return user;
-    }
-
-    public void setListIdAfterDeletingEmployee(int id) {
-        for (int i = id-1; i<usersList.size();i++) {
-            usersList.get(i).setId(id);
-            id++;
-        }
     }
 
     public List showOnlyEmployees(){
@@ -51,7 +41,7 @@ public class UserRepositoryMem {
 
     public void printAllUsers() {
         for (User u : usersList) {
-            System.out.println("Id:" + u.getEmployeeId() + "- Name:" + u.getFirstName());
+            System.out.println("Id:" + u.getId() + "- Name:" + u.getFirstName());
         }
     }
 }

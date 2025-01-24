@@ -49,9 +49,10 @@
                 <td th:text="${item.oib}">123456789</td>
                 <td th:text="${item.email}">user@todo.com</td>
                 <td th:text="${item.password}">12345</td>
-                <td> <a th:href="@{'/showEditEmployee?employeeId=' + ${item.employeeId}}"> <img src="edit.png" width="25" height="25"></a> </td>
-                <td> <a th:href="@{'/deleteEmployee?employeeId=' + ${item.employeeId}}"> <img src="delete.png" width="25" height="25"></a> </td>
-                <td> <a th:href="@{'/showTodosForEmployee?employeeId=' + ${item.employeeId}}"> <img src="todo_icon.png" width="25" height="25"></a> </td>
+                <td> <a th:href="@{'/showEditEmployee?id=' + ${item.id}}"> <img src="edit.png" width="25" height="25"></a> </td>
+                <td> <a th:href="@{'/deleteEmployee?id=' + ${item.id}}"> <img src="delete.png" width="25" height="25"></a> </td>
+               <!-- <td> <a th:href="@{'/showTodosForEmployee?employeeId=' + ${item.employeeId}}"> <img src="todo_icon.png" width="25" height="25"></a> </td>-->
+                <td> <a th:href="@{'/showTodosForEmployee?id=' + ${item.id}}"> <img src="todo_icon.png" width="25" height="25"></a> </td>
             </tr>
             </tbody>
         </table>
