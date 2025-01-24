@@ -15,13 +15,13 @@ import java.time.LocalDate;
 import java.util.List;
 
 @Controller
-public class EmployeeController {
+public class TodoController {
 
     @Autowired
     TodoRepository todoRepoDB;
-
     @Autowired
     UserRepository userRepoDB;
+
 
     @GetMapping("/todos")
     public String showTodos(Model model, HttpSession session) {
