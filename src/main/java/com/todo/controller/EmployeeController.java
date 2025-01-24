@@ -15,10 +15,11 @@ import java.time.LocalDate;
 import java.util.List;
 
 @Controller
-public class TodoController {
+public class EmployeeController {
 
     @Autowired
     TodoRepository todoRepoDB;
+
     @Autowired
     UserRepository userRepoDB;
 
@@ -53,6 +54,7 @@ public class TodoController {
 
         return "redirect:/todos";
     }
+
     @GetMapping("/deleteTodo")
     public String deleteTodo(@RequestParam("id") int id) {
 

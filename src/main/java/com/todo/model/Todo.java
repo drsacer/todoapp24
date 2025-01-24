@@ -7,12 +7,14 @@ import java.time.LocalDate;
 
 @Entity
 public class Todo {
-
-    private String title;
-    private String note;
     @Id
     @GeneratedValue
     private int id;
+
+    private String title;
+
+    private String note;
+
     private LocalDate date;
 
     @ManyToOne

@@ -2,6 +2,7 @@ package com.todo.controller;
 
 import com.todo.model.*;
 import jakarta.servlet.http.HttpSession;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -11,21 +12,23 @@ import org.springframework.web.bind.annotation.RequestParam;
 import java.util.List;
 
 @Controller
-public class UserController {
+@Slf4j
+public class SupervisorController {
 
     @Autowired
     UserRepositoryMem userRepo;
 
     @Autowired
     UserRepository userRepositoryDB;
+
     @Autowired
     TodoRepository todoRepositoryDB;
 
     @GetMapping("/employees")
     public String employees(Model model , HttpSession session) {
-        session.getAttribute("user");
-        model.addAttribute(userRepositoryDB.findByType(0));
 
+        model.addAttribute(userRepositoryDB.findAllEmployees());
+        log.info("Testing log");
         return "supervisor_employees.html";
     }
 
